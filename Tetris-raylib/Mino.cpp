@@ -26,10 +26,10 @@ void Mino::Draw()
 {
 	for (const auto& f : figure)
 	{
-		DrawRectangle((f.x + x) * f.size + 1, (f.y + y) * f.size + 1, f.size - 1, f.size - 1, randomColor);
+		DrawRectangle((f.x + x) * size + 1, (f.y + y) * size + 1, size - 1, size - 1, randomColor);
 		
 		if(f.x == 0 && f.y == 0)
-			DrawRectangleLines((f.x + x) * f.size, (f.y + y) * f.size, f.size, f.size, RED);
+			DrawRectangleLines((f.x + x) * size, (f.y + y) * size, size, size, RED);
 	}
 }
 
@@ -46,6 +46,8 @@ void Mino::Rotate(int rotation)
 	if (rotation < 0)
 		rotation += 4;
 
+	std::vector<Block> tmpMino = figure;
+
 	for (int r = 0; r < rotation; ++r)
 	{
 		for (auto& f : figure)
@@ -54,6 +56,11 @@ void Mino::Rotate(int rotation)
 			f.x = -(f.y);
 			f.y = (tmpX);
 		}
+	}
+
+	if (!CanMove(x, y))
+	{
+		figure = tmpMino;
 	}
 }
 

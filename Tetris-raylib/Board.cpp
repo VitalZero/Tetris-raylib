@@ -45,14 +45,16 @@ void Board::Check()
 
 void Board::CheckLines()
 {
-	int allFilled = 1;
+	int allFilled = 0;
 
 	for (int y = tilesHeight - 2; y >= 0; --y)
 	{
 		for (int x = 1; x < tilesWidth - 1; ++x)
 		{
-			if (TileAt(y, x) <= 0)
-				continue;
+			if (TileAt(x, y) >= 0)
+			{
+				allFilled = 1;
+			}
 			else
 			{
 				allFilled = 0;
@@ -63,16 +65,30 @@ void Board::CheckLines()
 		if (allFilled > 0)
 		{
 			lineFilled = y;
+			++y;
 
-			DeleteLines();
+			Rearrange();
 		}
 	}
 }
 
 void Board::DeleteLines()
 {
-	for (int i = 1; 1 < tilesWidth - 1; ++i)
+	for (int i = 1; i < tilesWidth - 1; ++i)
 	{
 		SetTile(i, lineFilled, -1);
+	}
+
+	Rearrange();
+}
+
+void Board::Rearrange()
+{
+	for(int y = lineFilled; y > 0; --y)
+	{
+		for (int x = 1; x < tilesWidth - 1; ++x)
+		{
+			SetTile(x, y, TileAt(x, y - 1));
+		}
 	}
 }

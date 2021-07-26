@@ -14,6 +14,7 @@ public:
 private:
 	void CheckLines();
 	void DeleteLines();
+	void Rearrange();
 
 public:
 	static constexpr int TileSize = 30;

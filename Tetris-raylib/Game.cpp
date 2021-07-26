@@ -29,7 +29,7 @@ void Game::Input()
 {
 	if (IsKeyDown(KEY_DOWN))
 	{
-		accumulator += 0.03f;
+		accumulator += 0.01f;
 	}
 
 	if (IsKeyPressed(KEY_UP))
@@ -38,15 +38,36 @@ void Game::Input()
 	}
 
 
-	if (IsKeyPressed(KEY_LEFT))
+	if (IsKeyDown(KEY_LEFT))
 	{
-		if(mino.CanMove(-1, 0))
-			mino.Move(-1, 0);
+		moveLR -= 0.01f;
+
+		if (moveLR <= -1.0f)
+		{
+			if (mino.CanMove(-1, 0))
+			{
+				mino.Move(-1, 0);
+				moveLR = 0.0f;
+			}
+		}
 	}
-	else if (IsKeyPressed(KEY_RIGHT))
+	else if (IsKeyDown(KEY_RIGHT))
 	{
-		if (mino.CanMove(1, 0))
-			mino.Move(1, 0);
+		moveLR += 0.01f;
+
+		if (moveLR >= 1.0f)
+		{
+			if (mino.CanMove(1, 0))
+			{
+				mino.Move(1, 0);
+				moveLR = 0.0f;
+			}
+		}
+	}
+
+	if (IsKeyUp(KEY_LEFT) && IsKeyUp(KEY_RIGHT))
+	{
+		moveLR = 0.0f;
 	}
 }
 

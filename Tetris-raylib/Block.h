@@ -17,5 +17,4 @@ struct Block
 {
 	int x;
 	int y;
-	int size;
 };
