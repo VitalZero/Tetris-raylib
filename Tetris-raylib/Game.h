@@ -19,4 +19,5 @@ private:
 	float delay = 1.5f; //2 seconds
 	float accumulator = 0.0f;
 	float moveLR = 0.0f;
+	Music music;
 };

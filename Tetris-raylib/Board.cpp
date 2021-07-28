@@ -8,16 +8,16 @@ Board::Board(int x, int y, int tileSize)
 
 void Board::Draw()
 {
-	Color color = RAYWHITE;
-
 	for (int y = 0; y < tilesHeight; ++y)
 	{
 		for (int x = 0; x < tilesWidth; ++x)
 		{
 			int tileData = TileAt(x, y);
-	
+
+			Color color = RAYWHITE;
+
 			if (tileData == -1)
-				color = { 10, 10, 10, 255 };
+				color = BLACK;
 			if (tileData == 9)
 				color = RAYWHITE;
 			else

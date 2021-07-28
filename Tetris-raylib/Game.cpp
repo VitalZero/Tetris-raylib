@@ -7,10 +7,15 @@ Game::Game(int width, int height)
 	board(0, 0, Board::TileSize), mino(0, 0, Mino::Shape::S, Board::TileSize, board)
 {
 	InitWindow(width, height, "Tetris raylib!");
+	InitAudioDevice();
+	music = LoadMusicStream("badguyinst.mp3");
 }
 
 void Game::Run()
 {
+	PlayMusicStream(music);
+	//SetMusicVolume(music, 0.8f);
+
 	while (!WindowShouldClose())
 	{
 		Input();
@@ -20,8 +25,13 @@ void Game::Run()
 		ClearBackground(BLACK);
 		Draw();
 		EndDrawing();
+
+		UpdateMusicStream(music);
 	}
 
+	StopMusicStream(music);
+	UnloadMusicStream(music);
+	CloseAudioDevice();
 	CloseWindow();
 }
 
