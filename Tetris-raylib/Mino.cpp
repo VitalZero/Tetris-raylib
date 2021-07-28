@@ -18,7 +18,6 @@ void Mino::Draw()
 	for (const auto& f : figure)
 	{
 		DrawRectangle((f.x + x) * size + 1, (f.y + y) * size + 1, size - 1, size - 1, randomColor);
-		DrawRectangleLines((f.x + x) * size, (f.y + y) * size, size, size, BLACK);
 	}
 }
 

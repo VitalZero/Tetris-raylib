@@ -29,7 +29,7 @@ void Game::Input()
 {
 	if (IsKeyDown(KEY_DOWN))
 	{
-		accumulator += 0.005f;
+		accumulator += 0.02f;
 	}
 
 	if (IsKeyPressed(KEY_UP))
@@ -40,7 +40,7 @@ void Game::Input()
 
 	if (IsKeyDown(KEY_LEFT))
 	{
-		moveLR -= 0.01f;
+		moveLR -= 0.005f;
 
 		if (moveLR <= -1.0f)
 		{
