@@ -24,13 +24,15 @@ public:
 	void Update(float dt);
 	void Draw();
 	void Move(int x, int y);
-	void Rotate(int rotation);
+	void Rotate();
 	bool CanMove(int x, int y) const;
 	void Put();
 	void Reset();
 
 private:
 	void SetPos(int x, int y);
+	void RotateRight();
+	void RotateLeft();
 
 private:
 	int x;

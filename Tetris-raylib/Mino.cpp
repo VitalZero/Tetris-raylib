@@ -5,16 +5,7 @@ Mino::Mino(int x, int y, Shape shapeType, int size, Board& board)
 	:
 	x(x), y(y), shapeType(shapeType), size(size), board(board), rng(rd()), figureDst(0, 6), colorDst(0, 4)
 {
-	int randomFigure = figureDst(rng);
-	colorIndex = colorDst(rng);
-	randomColor = colors[colorIndex];
-
-	figure.emplace_back(Figures[randomFigure][0]);
-	figure.emplace_back(Figures[randomFigure][1]);
-	figure.emplace_back(Figures[randomFigure][2]);
-	figure.emplace_back(Figures[randomFigure][3]);
-
-	SetPos(4, 5);
+	Reset();
 }
 
 void Mino::Update(float dt)
@@ -27,9 +18,7 @@ void Mino::Draw()
 	for (const auto& f : figure)
 	{
 		DrawRectangle((f.x + x) * size + 1, (f.y + y) * size + 1, size - 1, size - 1, randomColor);
-		
-		if(f.x == 0 && f.y == 0)
-			DrawRectangleLines((f.x + x) * size, (f.y + y) * size, size, size, RED);
+		DrawRectangleLines((f.x + x) * size, (f.y + y) * size, size, size, BLACK);
 	}
 }
 
@@ -39,28 +28,33 @@ void Mino::Move(int x, int y)
 	this->y += y;
 }
 
-void Mino::Rotate(int rotation)
+void Mino::Rotate()
 {
-	rotation = (rotation) % 4;
+	RotateRight();
 
-	if (rotation < 0)
-		rotation += 4;
-
-	std::vector<Block> tmpMino = figure;
-
-	for (int r = 0; r < rotation; ++r)
+	if (!CanMove(0, 0))
 	{
-		for (auto& f : figure)
-		{
-			int tmpX = f.x;
-			f.x = -(f.y);
-			f.y = (tmpX);
-		}
+		RotateLeft();
 	}
+}
 
-	if (!CanMove(x, y))
+void Mino::RotateRight()
+{
+	for (auto& f : figure)
 	{
-		figure = tmpMino;
+		int tmpX = f.x;
+		f.x = -f.y;
+		f.y = tmpX;
+	}
+}
+
+void Mino::RotateLeft()
+{
+	for (auto& f : figure)
+	{
+		int tmpX = f.x;
+		f.x = f.y;
+		f.y = -tmpX;
 	}
 }
 
@@ -104,5 +98,5 @@ void Mino::Reset()
 	figure.emplace_back(Figures[randomFigure][2]);
 	figure.emplace_back(Figures[randomFigure][3]);
 
-	SetPos(4, 0);
+	SetPos(6, 0);
 }

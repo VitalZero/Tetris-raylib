@@ -29,12 +29,12 @@ void Game::Input()
 {
 	if (IsKeyDown(KEY_DOWN))
 	{
-		accumulator += 0.01f;
+		accumulator += 0.005f;
 	}
 
 	if (IsKeyPressed(KEY_UP))
 	{
-		mino.Rotate(1);
+		mino.Rotate();
 	}
 
 
@@ -53,7 +53,7 @@ void Game::Input()
 	}
 	else if (IsKeyDown(KEY_RIGHT))
 	{
-		moveLR += 0.01f;
+		moveLR += 0.005f;
 
 		if (moveLR >= 1.0f)
 		{
