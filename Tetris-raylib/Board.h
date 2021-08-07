@@ -18,11 +18,11 @@ private:
 
 public:
 	static constexpr int TileSize = 30;
+	static constexpr int tilesWidth = 12;
+	static constexpr int tilesHeight = 20;
 
 private:
 	int lineFilled = -1;
-	static constexpr int tilesWidth = 12;
-	static constexpr int tilesHeight = 20;
 	int map[tilesHeight * tilesWidth] =
 	{
 		9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 9,

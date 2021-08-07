@@ -67,8 +67,15 @@ bool Mino::CanMove(int x, int y) const
 {
 	for (const auto& f : figure)
 	{
-		if (board.TileAt( (f.x + this->x) + x, (f.y + this->y) + y) >= 0)
-			return false;
+		int x1 = f.x + this->x + x;
+		int y1 = f.y + this->y + y;
+
+		if ((x1 >= 0 && x1 < Board::tilesWidth) &&
+			(y1 >= 0 && y1 < Board::tilesHeight))
+		{
+			if (board.TileAt(x1, y1) >= 0)
+				return false;
+		}
 	}
 
 	return true;
